@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class LoginTest {
     @Test
     public void valid_login(){
+        System.setProperty("webdriver.chrome.driver","/usr/local/bin/chromedriver");
         WebDriver driver=new ChromeDriver();
         LoginPage loginPage=LoginPage.launch(driver,System.getenv("BASE_URL"));
         loginPage.login("naik.atmaram@gmail.com","hello");
