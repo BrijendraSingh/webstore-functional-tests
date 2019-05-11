@@ -1,5 +1,6 @@
 package com.webstore.test;
 
+import com.webstore.pages.HomePage;
 import com.webstore.pages.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -23,11 +24,13 @@ public class SmokeTest {
     public void buy_product(){
         System.setProperty("webdriver.chrome.driver","/usr/local/bin/chromedriver");
         LoginPage loginPage=LoginPage.launch(driver,System.getenv("BASE_URL"));
-        assertThat(
-                loginPage.login("user1@localhost.com","user@1")
+        HomePage homePage=loginPage.login("user1@localhost.com","user@1");
+        String stock=homePage.getStock("Tata Tea 100g");
+        int desired=Integer.parseInt(stock)-1;
+        assertThat(homePage
                         .buy("Tata Tea 100g",1)
                         .getStock("Tata Tea 100g"),
-                is(equalTo("9")));
+                is(equalTo(""+desired)));
     }
     @AfterMethod
     public void tearDown(){
