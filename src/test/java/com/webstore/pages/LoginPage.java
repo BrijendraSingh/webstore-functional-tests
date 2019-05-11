@@ -9,7 +9,7 @@ public class LoginPage extends BasePage {
     public By loginButton = By.cssSelector("#loginButton");
 
     public LoginPage(WebDriver driver) {
-        super(driver);
+        super(driver,By.cssSelector("#username"));
     }
     public static LoginPage launch(WebDriver driver,String baseURL){
         driver.get(baseURL+"/ui/");
