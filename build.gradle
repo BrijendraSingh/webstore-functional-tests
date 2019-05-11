@@ -19,12 +19,19 @@ repositories {
 }
 
 dependencies {
-    compile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    // https://mvnrepository.com/artifact/org.testng/testng
+    testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.+'
 
 
 }
-
+test { //this is the gradle task to be executed
+    useTestNG() { //Tells Gradle to use TestNG
+        useDefaultListeners = true // Tells TestNG to execute its default reporting structure
+        suites 'src/test/suite.xml' //location of our suite.xml
+    }
+}
 sourceSets {
     main {
         output.resourcesDir = "build/classes/main"
